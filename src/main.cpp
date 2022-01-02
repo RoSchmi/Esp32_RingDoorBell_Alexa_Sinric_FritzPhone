@@ -155,7 +155,7 @@ std::map<String, deviceConfig_t> devices =
   // You have to set the pins correctly.
   // In this App we used -1 when the relay pin shall be ignored 
 
-  { SWITCH_ID_1, {  (int)LED1_PIN,  (int)BUTTON_1, true, 0}},
+  { SWITCH_ID_1, {  (int)LED1_PIN,  (int)BUTTON_1, false, 0}},
   { SWITCH_ID_2, {  (int)-1, (int)BUTTON_2, false, 1}}
 };
 
@@ -347,15 +347,14 @@ void setup()
   if (!restoreStatesFromServer)
   {
     // Change_here_for_more_power_sockets 
-    bool actualSocketState = fritz.getSwitchState(FRITZ_DEVICE_AIN_01);
-    
-    onPowerState1(SWITCH_ID_1, actualSocketState);  // once more switch Fritz!Dect socket to actual state  
+    bool actualSocketState = powerState1;
+    onPowerState1(SWITCH_ID_1, actualSocketState);  // switch to actual state  
 
     // get Switch device back
     SinricProSwitch& mySwitch = SinricPro[SWITCH_ID_1];
     // send powerstate event      
     mySwitch.sendPowerStateEvent(actualSocketState); // send the actual powerState to SinricPro server
-    deb_println(F("PowerState of Fritz!Dect transmitted to server"), DEBUG_INFO);
+    deb_println(F("PowerState transmitted to server"), DEBUG_INFO);
   }
   
   // Set time interval for repeating commands
@@ -519,91 +518,30 @@ bool onPowerState(String deviceId, bool &state)
   snprintf(outStr, sizeof(outStr), "Received: %s State: %s", deviceId.c_str(), state ? " on" : " off");
   deb_println(outStr, DEBUG_VERBOSE);
   
-  if (deviceId == POWERSENSOR_ID_1)
+  switch (devices[deviceId].index)
   {
-    /*
-    PowerMeasureMgr_1.SetPowerMeasureState(state);
-    if (state)
+    case 0:
     {
-      PowerMeasureMgr_1.SetAutoRepeatCounter(MEASURE_READ_REPEAT_COUNT);
+      returnResult = onPowerState1(deviceId, state);
     }
-    PowerMeasureMgr_1.SetSendForced(true);
-    returnResult = doPowerMeasure(PowerMeasureMgr_1);
-    */
-  }
-  else
-  {
-    switch (devices[deviceId].index)
+    break;
+    case 1:
     {
-      case 0:
-      {
-        returnResult = onPowerState1(deviceId, state);
-      }
-      break;
-      case 1:
-      {
-        returnResult = onPowerState2(deviceId, state);
-      }
-      break;  
-      default:
-      {}
+      returnResult = onPowerState2(deviceId, state);
     }
+    break;  
+    default:
+    {}
   }
   return returnResult;
 }
 
 bool onPowerState1(const String &deviceId, bool state)
 {
-  bool switchResult = false;
-  
-  if (state == true)
-  {
-    switchResult = fritz.setSwitchOn(FRITZ_DEVICE_AIN_01);
-  }
-  else
-  {
-    switchResult = !fritz.setSwitchOff(FRITZ_DEVICE_AIN_01);
-  }
-  if (switchResult == true)  // Set LED to on or off
-  {
-    int relayPIN = devices[deviceId].relayPIN; // get the relay pin for corresponding device
-    if (relayPIN != -1)
-    {
-      digitalWrite(relayPIN, state);      // set the new relay state
-    }
-    char outStr[50] {0};
-    snprintf(outStr, sizeof(outStr), "Device 1 turned %s\r\n", state ? "on" : "off");
-    deb_println(outStr, DEBUG_INFO);
-    
-    powerState1 = state;
-    flashButtonState.actState = state;    
-  }
-  else
-  {
-    char outStr[50] {0};
-    snprintf(outStr, sizeof(outStr), "Failed to turn Device 1 %s\r\n", state ? "on" : "off");
-    deb_println(outStr, DEBUG_ERROR);
-    
-  }
-  bool readPowerResult = true;
-  
-  if (devices[deviceId].hasPowerMeasure)
-  { 
-    // readPowerResult = doPowerMeasure(PowerMeasureMgr_1);
-    // PowerMeasureMgr_1.SetSendForced(true);
-    // PowerMeasureMgr_1.SetPowerMeasureState(true);
-    // PowerMeasureMgr_1.SetAutoRepeatCounter(SWITCH_READ_REPEAT_COUNT);
-  }
-     
-  return switchResult && readPowerResult; // request handled properly
-}
-
-bool onPowerState2(const String &deviceId, bool state)
-{
   char outStr[50] {0};
-  snprintf(outStr, sizeof(outStr), "Device 2 turned %s\r\n", state ? "on" : "off");
+  snprintf(outStr, sizeof(outStr), "Device 1 turned %s\r\n", state ? "on" : "off");
   deb_println(outStr, DEBUG_INFO); 
-  powerState2 = state;
+  powerState1 = state;
   
   bool atLeastOneSuccess = false;
   if (state == true)
@@ -672,7 +610,18 @@ bool onPowerState2(const String &deviceId, bool state)
     }  
   }
   return atLeastOneSuccess; // request handled properly ?
+}
 
+bool onPowerState2(const String &deviceId, bool state)
+{
+  char outStr[50] {0};
+  snprintf(outStr, sizeof(outStr), "Device 2 turned %s\r\n", state ? "on" : "off");
+  deb_println(outStr, DEBUG_INFO); 
+  powerState2 = state;
+
+  // do something......
+  
+  return true;   // or false if not successful
 }
 
 

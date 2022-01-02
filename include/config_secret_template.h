@@ -8,10 +8,10 @@
 #define IOT_CONFIG_WIFI_PASSWORD        "MyPassword"
 
 // FritzBox
-#define FRITZ_IP_ADDRESS "fritz.box"    // IP Address of FritzBox
-                                        // Change for your needs
-#define FRITZ_USER ""                   // FritzBox User (may be empty)
-#define FRITZ_PASSWORD "MySecretName"   // FritzBox Password
+#define FRITZ_IP_ADDRESS "fritz.box"        // IP Address of FritzBox
+                                            // Change for your needs
+#define FRITZ_USER "myFritzboxUserName"     // FritzBox User (may evtl. be empty)
+#define FRITZ_PASSWORD "MySecretPassword"   // FritzBox Password
 
 // Sinric Pro
 #define APP_KEY           "de0bxxxx-1x3x-4x3x-ax2x-5dabxxxxxxxx"      // Should look like "de0bxxxx-1x3x-4x3x-ax2x-5dabxxxxxxxx"

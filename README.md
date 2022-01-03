@@ -3,7 +3,7 @@
 Use Esp32 to ring Dect phones of a Fritzbox (Router/DECT-Phone combination) when the 'Ring Video Doorbell Wired' button is pressed (works in cooperation with Ring- and Sinric Pro-Alexa Skills and Alexa Routines).
 
 I bought a 'Ring Video Doorbell Wired". With the provided Alexa skill I could use the Alexa ECHO plus for chime notifications. 
-But as I am very often not sitting in the livingroom and the smartphone could be set silent I wondered if I could utilize the several DECT-phone connected to my Fritzbox (Router/DECT-Phone combination) which are located in several rooms. 
+But as I am very often not sitting in the livingroom and the smartphone could be set silent I wondered if I could utilize the several DECT-phones connected to my Fritzbox (Router/DECT-Phone combination) which are located in several rooms. 
 
 As the DECT-phones could not be used by preconfigured means I developed the solution below.
 

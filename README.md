@@ -7,7 +7,7 @@ But as I am very often not sitting in the livingroom and the smartphone could be
 
 As the DECT-phones could not be used by preconfigured means I developed the solution below.
 
-Before you begin to start ... consider to use the much easier fallback solution shown on the picture:
+Before you begin to start ... consider to merely use the much easier fallback solution shown on the picture:
 
 ![Gallery](https://github.com/RoSchmi/Esp32_RingDoorBell_Alexa_Sinric_FritzPhone/blob/master/pictures/Fallback.png)
 

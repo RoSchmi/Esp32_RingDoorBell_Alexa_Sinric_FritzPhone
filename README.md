@@ -70,5 +70,8 @@ Now hopefully the DECT-phones should ring when you press the doorbell.
 
 I hope that I didn't forget any important steps, if I did, please let me know. 
 
+If you like even more complex examples, please have a look on this application where the doorbell function is combined with switching and monitoring of a Fritz!Dect 200
+switchable power socket.
 
+https://github.com/RoSchmi/Esp32Repos/tree/master/Proj/Esp32_Sinric_Ring_DoorBell_Alexa_Fritzbox_MyHome
 

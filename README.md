@@ -25,4 +25,4 @@ https://help.sinric.pro/pages/tutorials/switch.html
 
 Setting the Sinric Pro switch to 'On' (switch is programmed to reset automatically after 5 seconds to 'Off') induces an action in the Esp32 application provided in this repository.
 
-The induced action of the Esp32 is ringing a Fritzbox DECT-Phone for some seconds.
+The induced action of the Esp32 App is ringing a Fritzbox DECT-Phone for some seconds through the Fritzbox REST Api.

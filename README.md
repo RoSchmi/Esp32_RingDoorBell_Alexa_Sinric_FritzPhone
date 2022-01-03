@@ -63,8 +63,8 @@ When everthing worked fine, you should now have a new switch (socket) device in 
 
 Now we come to the 'Ring Video Doorbell' part. To continue, the doorbell should be installed and setted up properly and should work properly with the 'Ring' smartphone App.
 
-Now in the Alexa App on your smartphone you should add the 'Ring Video Doorbell' Alexa skill and create an Alexa Routine. 
-In this Routine you can add an action: set (e.g.) 'FritzPhoneRing' to 'On'
+Now in the Alexa App on your smartphone you should add the 'Ring Video Doorbell' Alexa skill and create an Alexa routine. 
+In this routine you can add an action: set (e.g.) 'FritzPhoneRing' to 'On'
 
 Now hopefully the DECT-phones should ring when you press the doorbell.
 
